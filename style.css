@@ -1,0 +1,268 @@
+body{
+    background-color: #f1f5f9; /* Fundo cinza claro bem moderno */
+    color: #334155;
+    min-height: 100%;
+}
+
+header {
+    background-color: #1e293b; /* Azul escuro */
+    color: #ffffff;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.conteinerPrincipal{
+    display: flex;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    gap: 2rem;
+}
+
+.sidebar{
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+}
+
+.conteinerCadastro {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.8rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* shadow: sombra */
+
+}
+
+.grupo{
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+    color: #1e293b;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 0.5rem;
+}
+
+h3 {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+}
+
+.conteinerSelecao {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.8rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.conteinerOperacoes {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.8rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.conteinerHistorico {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.8rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+}
+
+.grupoTransferencia {
+    margin-bottom: 1rem;
+}
+
+.conteinerContaAtiva {
+    background: linear-gradient(135deg, #011137 0%, #1e293b 100%); 
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.conteinerContaAtiva h2 {
+    color: #94a3b8;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+input [type="text"]{
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: #f8fafc;
+    color: #334155;
+    transition: all 0.2s ease;
+}
+
+input[type="number"]{
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: #f8fafc;
+    color: #334155;
+    transition: all 0.2s ease;
+}
+
+select{
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: #f8fafc;
+    color: #334155;
+    transition: all 0.2s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+#cadastrar {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #05275e; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+
+}
+
+#cadastrar:hover {
+    background-color: #2581eb;
+}
+
+#infoTitular {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.saldo-destaque {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #38bdf8; /* Azul claro estilo painel digital */
+    margin: 0.6rem 0;
+}
+
+.grupoBotoes {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.grupoBotoes button {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: white;
+
+}
+
+.btnDeposito { background-color: #05275e ; } 
+.btnDeposito:hover { opacity: 0.9; }
+
+.btnSaque { background-color: #05275e; } 
+.btnSaque:hover { opacity: 0.9; }
+
+.btnTransferir { background-color: #05275e; } 
+.btnTransferir:hover { opacity: 0.9; }
+
+.tabela {
+    overflow-x: auto; /* Garante que não quebre em telas menores */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* deixa a tabela com bordar finas, sem duplica-las */
+    text-align: left;
+}
+
+th {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.95rem;
+    background-color: #f8fafc;
+    color: #64748b;
+    font-weight: 600;
+}
+
+td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.95rem;
+    color: #334155;
+}
+
+.tabelaVazia {
+    text-align: center;
+    color: #94a3b8;
+    padding: 2rem !important;
+}
+
+#erro{
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background-color: #fef2f2;
+    color: #ef4444;
+    border: 1px solid #fee2e2;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+#erroOperacao{
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background-color: #fef2f2;
+    color: #ef4444;
+    border: 1px solid #fee2e2;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+#sucesso{
+      margin-top: 1rem;
+    padding: 0.75rem;
+    background-color: #f2fef2;
+    color: #053c13;
+    border: 1px solid #f2fef2;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+}

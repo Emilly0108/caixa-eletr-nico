@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa Eletrônico</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1> BANCO JS - DIGITAL </h1>
+    </header>
+
+    <div class="containerPrincipal"> <!--css ok-->
+        <div class="sidebar"> <!--css ok-->
+                <div class="conteinerCadastros"> <!--css ok-->
+                    <h2> Cadastrar Conta </h2>
+
+                    <form id="formCadastro">
+                        <div class="grupo"> <!--css ok-->
+                            <h3>Nome do titular da conta </h3>
+                            <input type="text" id="nomeTitular" placeholder="nome do titular">
+                        </div>
+                        <div class="grupo">
+                            <h3> Digite o número da conta </h3>
+                            <input type="number" id="numeroConta" placeholder="numero da conta"> 
+                        </div>
+                        <div class="grupo">
+                            <h3> Digite o saldo inicial de sua conta </h3>
+                            <input type="text" id="saldoInicial" placeholder="saldo inicial">
+                        </div>
+                
+                    <button type="submit" id="cadastrar"> Cadastrar </button>
+                    
+                    </form>
+                    
+                    <p id="erro"></p> 
+                    <p id="sucesso"></p>
+            </div>
+        </div>
+
+            <div class="conteinerSelecao"> <!--css feito-->
+                <h2> Selecionar conta </h2>
+
+                <div class="grupo">
+                    <h3>Selecione a conta que quer operar </h3>
+                    <select id="selectConta">
+                        <option value=""> ---- Nenhuma conta cadastrada ---- </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="containerCentral"> <!---css ok-->
+            <p id="erroOperacao"></p>
+
+            <div class="conteinerContaAtiva"> <!---css ok-->
+                <h2 style="color: #ffffff;">Conta Selecionada</h2>
+
+                <div class="grupo-status">
+
+                <h3 id="infoTitular">Nenhuma conta ativa</h3>
+                <div id="infoSaldo" class="saldo-destaque">R$ 0,00</div>
+                <p id="infoNumero" class="texto-ajuda">Selecione uma conta na barra lateral para realizar operações.</p>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="conteinerOperacoes"> <!---css ok-->
+            <h2> Realizar operação </h2>
+
+            <div class="grupoBotoes">
+                <button id="btnDeposito" class="btnDeposito">Depositar</button>
+                <button id="btnSaque" class="btnSaque">Sacar</button>
+                <button id="btnTransferir" class="btnTransferir">Transferir</button>
+            </div>
+
+            <div class="grupo">
+                <h3> Digite o valor que deseja transferir </h3>
+                <input type="number" id="valorOperacao" placeholder="0,00">
+            </div>
+
+            <div class="grupoTransferencia">
+                <h3>Número da conta de destino</h3>
+                <input type="number" id="contaDestino" placeholder="Número da conta">
+            </div>
+        </div>
+
+        <div class="conteinerHistorico">
+            <h2>Histórico de Movimentações</h2>
+            
+
+            <div class="tabela">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Titular</th>
+                            <th>Operação</th>
+                            <th>Valor</th>
+                            <th>Data/Horário</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaHistorico">
+                        <tr>
+                            <td colspan="3" class="tabelaVazia">Nenhuma movimentação registrada.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+   
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
