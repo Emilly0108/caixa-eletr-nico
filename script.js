@@ -8,7 +8,7 @@ const nomeTitular = document.getElementById("nomeTitular");
 const numeroConta = document.getElementById("numeroConta");
 const saldoInicial = document.getElementById("saldoInicial");
 const erro = document.getElementById("erro");
-const sucesso = document.getElementById("sucesso");
+const sucessoCadastro = document.getElementById("sucessoCadastro");
 
 //pegar select de conta
 const selectConta = document.getElementById("selectConta");
@@ -28,6 +28,7 @@ const btnTransferir = document.getElementById("btnTransferir");
 const valorOperacao = document.getElementById("valorOperacao");
 const contaDestino = document.getElementById("contaDestino");
 const erroOperacao = document.getElementById("erroOperacao");
+const sucessoOperacao = document.getElementById("sucessoOperacao")
  
 // Tabela de histórico
 const listaHistorico = document.getElementById("listaHistorico");
@@ -88,7 +89,7 @@ function cadastrarConta(event) { // função cadastro
     listarContas(); // chamando a função listarContas
     formCadastro.reset(); // limpando o formulario
 
-    sucesso.textContent = "Conta cadastrada com sucesso.";
+    sucessoCadastro.textContent = "Conta cadastrada com sucesso.";
 }
 
 function listarContas(){ // funcao de listar a conta
@@ -191,8 +192,9 @@ function depositar(){ // função depositar
     atualizarPainel(); // atualiza o valor no painel
     exibirHistorico(); // exibe o histórico
 
+    erroOperacao.textContent = ""
     valorOperacao.value = ""; // limpa a operação
-    sucesso.textContent = "deposito realizado com sucesso"
+    sucessoOperacao.textContent = "deposito realizado com sucesso"
 
 }
 
@@ -224,9 +226,10 @@ function sacar(){ // função sacar
 
     atualizarPainel();
     exibirHistorico();
-
+    
+    erroOperacao.textContent = ""
     valorOperacao.value = "";
-    sucesso.textContent = "saque realizado com sucesso"
+    sucessoOperacao.textContent = "saque realizado com sucesso"
     
 }
 
@@ -282,8 +285,9 @@ function transferir(){
 
     valorOperacao.value = "";
     contaDestino.value = "";
-
-    sucesso.textContent = "transferência realizada com sucesso"
+    
+    erroOperacao.textContent = ""
+    sucessoOperacao.textContent = "transferência realizada com sucesso"
 }
 
 function registrarHistorico(conta, tipo, valor){ // função de registrar o histórioco

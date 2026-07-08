@@ -36,7 +36,7 @@
                     </form>
                     
                     <p id="erro"></p> 
-                    <p id="sucesso"></p>
+                    <p id="sucessoCadastro"></p>
             </div>
         </div>
 
@@ -53,7 +53,7 @@
         </div>
 
         <div class="containerCentral"> <!---css ok-->
-            <p id="erroOperacao"></p>
+            
 
             <div class="conteinerContaAtiva"> <!---css ok-->
                 <h2 style="color: #ffffff;">Conta Selecionada</h2>
@@ -62,9 +62,12 @@
 
                 <h3 id="infoTitular">Nenhuma conta ativa</h3>
                 <div id="infoSaldo" class="saldo-destaque">R$ 0,00</div>
-                <p id="infoNumero" class="texto-ajuda">Selecione uma conta na barra lateral para realizar operações.</p>
+                <p id="infoNumero" class="texto-ajuda">Selecione uma conta para realizar operações.</p>
                 </div>
+                
             </div>
+            <p id="erroOperacao"></p>
+            <p id="sucessoOperacao"></p>
             
         </div>
 
@@ -77,6 +80,7 @@
                 <button id="btnTransferir" class="btnTransferir">Transferir</button>
             </div>
 
+
             <div class="grupo">
                 <h3> Digite o valor que deseja transferir </h3>
                 <input type="number" id="valorOperacao" placeholder="0,00">
@@ -87,6 +91,10 @@
                 <input type="number" id="contaDestino" placeholder="Número da conta">
             </div>
         </div>
+
+        
+            <p id="erroOperacao"></p>
+            <p id="sucessoOperacao"></p>
 
         <div class="conteinerHistorico">
             <h2>Histórico de Movimentações</h2>

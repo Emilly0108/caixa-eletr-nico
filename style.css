@@ -255,8 +255,20 @@ td {
     text-align: center;
 }
 
-#sucesso{
-      margin-top: 1rem;
+#sucessoCadastro{
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background-color: #f2fef2;
+    color: #053c13;
+    border: 1px solid #f2fef2;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+#sucessoOperacao{
+    margin-top: 1rem;
     padding: 0.75rem;
     background-color: #f2fef2;
     color: #053c13;
