@@ -1,123 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caixa Eletrônico</title>
+    <title>Caixa Eletrônico - Banco JS</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1> BANCO JS - DIGITAL </h1>
+        <h1>BANCO JS - DIGITAL</h1>
     </header>
 
-    <div class="containerPrincipal"> <!--css ok-->
-        <div class="sidebar"> <!--css ok-->
-                <div class="conteinerCadastros"> <!--css ok-->
-                    <h2> Cadastrar Conta </h2>
+    <div class="containerPrincipal">
 
-                    <form id="formCadastro">
-                        <div class="grupo"> <!--css ok-->
-                            <h3>Nome do titular da conta </h3>
-                            <input type="text" id="nomeTitular" placeholder="nome do titular">
-                        </div>
-                        <div class="grupo">
-                            <h3> Digite o número da conta </h3>
-                            <input type="number" id="numeroConta" placeholder="numero da conta"> 
-                        </div>
-                        <div class="grupo">
-                            <h3> Digite o saldo inicial de sua conta </h3>
-                            <input type="text" id="saldoInicial" placeholder="saldo inicial">
-                        </div>
+        <!-- Painel de Cadastro e Seleção -->
+        <aside class="sidebar">
+            <div class="conteinerCadastros">
+                <h2>Cadastrar Conta</h2>
+
+                <form id="formCadastro">
+                    <div class="grupo">
+                        <h3>Nome do titular da conta</h3>
+                        <input type="text" id="nomeTitular" placeholder="Nome do titular">
+                    </div>
+
+                    <div class="grupo">
+                        <h3>Digite o número da conta</h3>
+                        <input type="number" id="numeroConta" placeholder="Número da conta"> 
+                    </div>
+
+                    <div class="grupo">
+                        <h3>Digite o saldo inicial de sua conta</h3>
+                        <input type="number" step="0.01" id="saldoInicial" placeholder="0.00">
+                    </div>
                 
-                    <button type="submit" id="cadastrar"> Cadastrar </button>
-                    
-                    </form>
-                    
-                    <p id="erro"></p> 
-                    <p id="sucessoCadastro"></p>
+                    <button type="submit" id="cadastrar">Cadastrar</button>
+                </form>
+                
+                <p id="erro"></p> 
+                <p id="sucessoCadastro"></p>
             </div>
-        </div>
 
-            <div class="conteinerSelecao"> <!--css feito-->
-                <h2> Selecionar conta </h2>
+            <div class="conteinerSelecao">
+                <h2>Selecionar Conta</h2>
 
                 <div class="grupo">
-                    <h3>Selecione a conta que quer operar </h3>
+                    <h3>Selecione a conta que quer operar</h3>
                     <select id="selectConta">
-                        <option value=""> ---- Nenhuma conta cadastrada ---- </option>
+                        <option value="">---- Nenhuma conta cadastrada ----</option>
                     </select>
                 </div>
             </div>
-        </div>
+        </aside>
 
-        <div class="containerCentral"> <!---css ok-->
-            
+        <!-- LADO DIREITO: Painel de Operações, Status e Histórico -->
+        <main class="containerCentral">
 
-            <div class="conteinerContaAtiva"> <!---css ok-->
-                <h2 style="color: #ffffff;">Conta Selecionada</h2>
+            <!-- Card de Destaque da Conta Ativa -->
+            <div class="conteinerContaAtiva">
+                <h2>Conta Selecionada</h2>
 
                 <div class="grupo-status">
-
-                <h3 id="infoTitular">Nenhuma conta ativa</h3>
-                <div id="infoSaldo" class="saldo-destaque">R$ 0,00</div>
-                <p id="infoNumero" class="texto-ajuda">Selecione uma conta para realizar operações.</p>
+                    <h3 id="infoTitular">Nenhuma conta ativa</h3>
+                    <div id="infoSaldo" class="saldo-destaque">R$ 0,00</div>
+                    <p id="infoNumero" class="texto-ajuda">Selecione uma conta no menu lateral para realizar operações.</p>
                 </div>
-                
-            </div>
-            <p id="erroOperacao"></p>
-            <p id="sucessoOperacao"></p>
-            
-        </div>
 
-        <div class="conteinerOperacoes"> <!---css ok-->
-            <h2> Realizar operação </h2>
-
-            <div class="grupoBotoes">
-                <button id="btnDeposito" class="btnDeposito">Depositar</button>
-                <button id="btnSaque" class="btnSaque">Sacar</button>
-                <button id="btnTransferir" class="btnTransferir">Transferir</button>
+                <!-- Botões de Ação na Conta -->
+                <div class="acoesConta">
+                    <button id="btnEditarConta" class="btnEditar">Editar Titular</button>
+                    <button id="btnDeletarConta" class="btnDeletar">Excluir Conta</button>
+                </div>
             </div>
 
+            <!-- Operações Financeiras -->
+            <div class="conteinerOperacoes">
+                <h2>Realizar Operação</h2>
 
-            <div class="grupo">
-                <h3> Digite o valor que deseja transferir </h3>
-                <input type="number" id="valorOperacao" placeholder="0,00">
+                <div class="grupoBotoes">
+                    <button type="button" id="btnDeposito" class="btnDeposito">Depositar</button>
+                    <button type="button" id="btnSaque" class="btnSaque">Sacar</button>
+                    <button type="button" id="btnTransferir" class="btnTransferir">Transferir</button>
+                </div>
+
+                <div class="grupo">
+                    <h3>Digite o valor da operação</h3>
+                    <input type="number" step="0.01" id="valorOperacao" placeholder="0,00">
+                </div>
+
+                <div class="grupoTransferencia">
+                    <h3>Número da conta de destino</h3>
+                    <input type="number" id="contaDestino" placeholder="Número da conta">
+                </div>
+
+                <p id="erroOperacao"></p>
+                <p id="sucessoOperacao"></p>
             </div>
 
-            <div class="grupoTransferencia">
-                <h3>Número da conta de destino</h3>
-                <input type="number" id="contaDestino" placeholder="Número da conta">
+            <!-- Histórico -->
+            <div class="conteinerHistorico">
+                <h2>Histórico de Movimentações</h2>
+
+                <div class="tabela">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Titular</th>
+                                <th>Operação</th>
+                                <th>Valor</th>
+                                <th>Data/Horário</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaHistorico">
+                            <tr>
+                                <td colspan="4" class="tabelaVazia">Nenhuma movimentação registrada.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
-        
-            <p id="erroOperacao"></p>
-            <p id="sucessoOperacao"></p>
-
-        <div class="conteinerHistorico">
-            <h2>Histórico de Movimentações</h2>
-            
-
-            <div class="tabela">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Titular</th>
-                            <th>Operação</th>
-                            <th>Valor</th>
-                            <th>Data/Horário</th>
-                        </tr>
-                    </thead>
-                    <tbody id="listaHistorico">
-                        <tr>
-                            <td colspan="3" class="tabelaVazia">Nenhuma movimentação registrada.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        </main>
    
     </div>
 

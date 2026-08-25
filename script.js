@@ -1,6 +1,7 @@
-const contas = []; // array de guardar as contas
-let contaAtiva = null // constante que pega a conta selecionada
+const API = "https://6a8cb65763f113bab0b867f3.mockapi.io/contas"
 
+let contas = []; // array de guardar as contas
+let contaAtiva = null // constante que pega a conta selecionada
 
 // pegando os inputs de cadastro
 const formCadastro = document.getElementById("formCadastro")
@@ -41,14 +42,67 @@ btnDeposito.addEventListener("click", depositar);
 btnSaque.addEventListener("click", sacar);
 btnTransferir.addEventListener("click", transferir);
 
+document.getElementById("btnEditarConta").addEventListener("click", editarTitular);
+document.getElementById("btnDeletarConta").addEventListener("click", deletarContaAtiva);
+
 //funções
 
+async function buscarContas() {
+    try{
+        const resposta = await fetch(API)
 
-function cadastrarConta(event) { // função cadastro
+        if (!resposta.ok) {
+            throw new Error("Erro ao buscar contas")
+        }
+
+        contas = await resposta.json()
+
+        // transformamos novamente em array.
+        contas.forEach(conta => {
+
+            if (typeof conta.historico === 'string') {
+                try {
+                    conta.historico = JSON.parse(conta.historico)
+                } catch {
+                    conta.historico = []
+                }
+            } else if (!Array.isArray(conta.historico)) {
+                conta.historico = []
+            }
+
+        })
+
+        console.log("contas carregadas: ", contas)
+        listarContas()
+        
+    }catch(erroApi){
+        console.error("Error: ", erroApi)
+    }
+    
+}
+
+async function buscarContaId(id) {
+   try{
+    const resposta = await fetch(`${API}/${id}`)
+    if (!resposta.ok){
+        throw new Error("Conta não encontrada")
+    }
+
+    const conta = await resposta.json()
+    console.log("conta buscada por id", conta)
+    return conta
+   }catch(erroApi){
+    console.error("Erro ao buscar por id", erroApi)
+    return null
+   }
+}
+
+async function cadastrarConta(event) { // função cadastro
     event.preventDefault(); // previnir evento padrão
 
     erro.textContent= ""; // limpando mensagem de erro
 
+    if (sucessoCadastro) sucessoCadastro.textContent = ""
     //lendo valores digitados
     const nome = nomeTitular.value.trim();
     const numero = numeroConta.value.trim();
@@ -80,18 +134,106 @@ function cadastrarConta(event) { // função cadastro
         nome: nome,
         numero: numero,
         saldo: saldo,
-        historico: []
+        historico: JSON.stringify([])
     };
 
+    try{
+        const resposta = await fetch(API, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(novaConta)
+        });
 
-    contas.push(novaConta); // coloca a nova conta no array contas
-    console.log(contas); // veiricação de erro
-    listarContas(); // chamando a função listarContas
-    formCadastro.reset(); // limpando o formulario
+        if(!resposta.ok){
+            throw new Error("erro ao cadastrar na API")
+        }
+        
+        if(sucessoCadastro){
+            sucessoCadastro.textContent = "Conta cadastrada com sucesso"
+        }
 
-    sucessoCadastro.textContent = "Conta cadastrada com sucesso.";
+        formCadastro.reset();
+        await buscarContas();
+    }catch(err){
+        erro.textContent = "Erro ao salvar no servidor"
+        console.error(err)
+    }
+
 }
 
+async function atualizarConta(conta) {
+    try{
+        const payload = {
+            ...conta,
+            historico: JSON.stringify(conta.historico)
+        };
+
+        const resposta = await fetch(`${API}/${conta.id}`, {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(payload)
+        })
+
+        if(!resposta.ok){
+            throw new Error("Erro ao sincronizar dados")
+        }
+    }catch(err){
+        console.error("Erro ao atualizar conta:", err)
+    }
+    
+}
+
+async function editarTitular() {
+    if (!contaAtiva) {
+        erroOperacao.textContent = "Selecione uma conta para editar."
+        return
+    }
+
+    const novoNome = prompt("Digite o novo nome do titular:", contaAtiva.nome)
+    
+    if (novoNome && novoNome.trim() !== "") {
+        contaAtiva.nome = novoNome.trim()
+        await atualizarConta(contaAtiva)
+        atualizarPainel()
+        listarContas()
+        selectConta.value = contaAtiva.numero
+        sucessoOperacao.textContent = "Nome atualizado!"
+    }
+}
+
+async function deletarConta(id) {
+    try{
+        const resposta = await fetch(`${API}/${id}`, {
+            method: "DELETE"
+        });
+
+        if (!resposta.ok) {
+            throw new Error("Erro ao deletar conta")
+        }
+        
+        console.log(`Conta ID ${id} removida com sucesso`)
+        if (contaAtiva && contaAtiva.id === id) {
+            contaAtiva = null
+            selecionarConta()
+        }
+
+        await buscarContas()
+    }catch(err){
+        console.error("Erro ao deletar conta", err)
+    }
+    
+}
+
+async function deletarContaAtiva() {
+    if (!contaAtiva) {
+        erroOperacao.textContent = "Selecione uma conta para excluir."
+        return
+    }
+
+    if (confirm("Deseja realmente excluir esta conta?")) {
+        await deletarConta(contaAtiva.id)
+    }
+}
 function listarContas(){ // funcao de listar a conta
     selectConta.innerHTML = ""; // limpando o select para não repetir o o que já foi cadastrado
 
@@ -129,6 +271,7 @@ function buscarConta(numero){ //buscar conta pelo numero
 
 function selecionarConta(){ // função de selecionar a conta
     erroOperacao.textContent = ""; // esavaziando as mensagens de erro
+    if (sucessoOperacao) sucessoOperacao.textContent = "";
     const numeroSelecionado = selectConta.value; // pegando o valor da conta selecionada
 
     if(numeroSelecionado === ""){ // se nenhuma conta foi selecionada
@@ -172,7 +315,7 @@ function validarValor(valor){ // evita repetição de ifs nas funções deposita
 
 }
 
-function depositar(){ // função depositar
+async function depositar(){ // função depositar
     if(contaAtiva === null){ 
         erroOperacao.textContent = "selecione uma conta antes de operar.";
         return;
@@ -188,6 +331,8 @@ function depositar(){ // função depositar
     contaAtiva.saldo += valor; // pega a conta ativa e adiciona o valor do deposito
 
     registrarHistorico(contaAtiva, "Depósito", valor); // registra o histórico
+    
+    await atualizarConta(contaAtiva);
 
     atualizarPainel(); // atualiza o valor no painel
     exibirHistorico(); // exibe o histórico
@@ -198,7 +343,7 @@ function depositar(){ // função depositar
 
 }
 
-function sacar(){ // função sacar
+async function sacar(){ // função sacar
     erroOperacao.textContent = ""; // limpa o campo
 
     if (contaAtiva === null){
@@ -224,6 +369,8 @@ function sacar(){ // função sacar
     // regustra, atualiza e exibe
     registrarHistorico(contaAtiva, "saque", valor);
 
+    await atualizarConta(contaAtiva);
+
     atualizarPainel();
     exibirHistorico();
     
@@ -233,7 +380,7 @@ function sacar(){ // função sacar
     
 }
 
-function transferir(){
+async function transferir(){
     erroOperacao.textContent = "";
 
     if(contaAtiva === null){ // veirifica se não foi selecionado nenhuma conta
@@ -280,8 +427,11 @@ function transferir(){
     registrarHistorico(contaAtiva, `transferência enviada ${destino.numero}`, valor); 
     registrarHistorico(destino, `Transferencia recebida (Conta ${contaAtiva.numero})`, valor);
 
-    infoSaldo.textContent = `R$: ${contaAtiva.saldo.toFixed(2)}`;
-    exibirHistorico();
+    await atualizarConta(contaAtiva);
+    await atualizarConta(destino);
+
+    atualizarPainel()
+    exibirHistorico()
 
     valorOperacao.value = "";
     contaDestino.value = "";
@@ -309,8 +459,8 @@ function exibirHistorico(){ // função de exibir
     if(contaAtiva === null || contaAtiva.historico.length === 0){ //verifica se não tem conta ativa
         listaHistorico.innerHTML =`
         <tr>
-            <td colspan="3">Nenhuma movimentação registrada.</td>
-        </td> `;
+            <td colspan="4">Nenhuma movimentação registrada.</td>
+        </tr> `;
 
         return;
     }
@@ -332,7 +482,7 @@ function exibirHistorico(){ // função de exibir
         const colunaData = document.createElement("td");
         colunaData.textContent = movimentacao.data;
 
-        // Adiciona as três colunas na linha
+        // Adiciona as quatro colunas na linha
         linha.appendChild(colunaTitular);
         linha.appendChild(colunaTipo);
         linha.appendChild(colunaValor);
@@ -342,3 +492,5 @@ function exibirHistorico(){ // função de exibir
     }
 
 }
+
+buscarContas()

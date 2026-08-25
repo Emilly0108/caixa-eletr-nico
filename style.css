@@ -1,280 +1,257 @@
-body{
-    background-color: #f1f5f9; /* Fundo cinza claro bem moderno */
-    color: #334155;
-    min-height: 100%;
+/* Reset básico e tipografia */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body {
+    background-color: #f0f2f5;
+    color: #333;
+    padding-bottom: 40px;
+}
+
+/* Cabeçalho */
 header {
-    background-color: #1e293b; /* Azul escuro */
+    background-color: #1a365d;
     color: #ffffff;
-    padding: 1.5rem 2rem;
     text-align: center;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
 }
 
 header h1 {
-    font-size: 1.6rem;
-    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
 }
 
-.conteinerPrincipal{
-    display: flex;
+/* Layout Principal (Grid com Sidebar e Conteúdo Central) */
+.containerPrincipal {
     max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    gap: 2rem;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 25px;
 }
 
-.sidebar{
-    width: 360px;
+/* Sidebar e Containers de Seções */
+.sidebar {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-
+    gap: 20px;
 }
 
-.conteinerCadastro {
+.conteinerCadastros,
+.conteinerSelecao,
+.conteinerContaAtiva,
+.conteinerOperacoes,
+.conteinerHistorico {
     background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 1.8rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* shadow: sombra */
-
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.grupo{
-    margin-bottom: 1rem;
+.containerCentral {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
+/* Títulos */
 h2 {
-    font-size: 1.25rem;
-    color: #1e293b;
-    margin-bottom: 1.2rem;
-    font-weight: 600;
-    border-bottom: 2px solid #f1f5f9;
-    padding-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: #1a365d;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 8px;
 }
 
 h3 {
     font-size: 0.9rem;
-    color: #64748b;
-    margin-bottom: 0.4rem;
-    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 6px;
+    font-weight: 600;
 }
 
-.conteinerSelecao {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 1.8rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-}
-
-.conteinerOperacoes {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 1.8rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-}
-
-.conteinerHistorico {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 1.8rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-
-}
-
+/* Formagrupo e Inputs */
+.grupo, 
 .grupoTransferencia {
-    margin-bottom: 1rem;
+    margin-bottom: 15px;
 }
 
-.conteinerContaAtiva {
-    background: linear-gradient(135deg, #011137 0%, #1e293b 100%); 
-    color: #ffffff;
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-
-.conteinerContaAtiva h2 {
-    color: #94a3b8;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-input [type="text"]{
+input[type="text"],
+input[type="number"],
+select {
     width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
     font-size: 0.95rem;
-    background-color: #f8fafc;
-    color: #334155;
-    transition: all 0.2s ease;
-}
-
-input[type="number"]{
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    background-color: #f8fafc;
-    color: #334155;
-    transition: all 0.2s ease;
-}
-
-select{
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    background-color: #f8fafc;
-    color: #334155;
-    transition: all 0.2s ease;
-}
-
-input:focus, select:focus {
+    transition: border-color 0.2s;
     outline: none;
-    border-color: #3b82f6;
-    background-color: #ffffff;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+}
+
+/* Botão de Cadastro */
 #cadastrar {
     width: 100%;
-    padding: 0.75rem;
-    background-color: #05275e; 
+    padding: 10px;
+    background-color: #2b6cb0;
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 #cadastrar:hover {
-    background-color: #2581eb;
+    background-color: #2c5282;
+}
+
+/* Mensagens de Feedback */
+#erro, #erroOperacao {
+    color: #e53e3e;
+    font-size: 0.85rem;
+    margin-top: 8px;
+}
+
+#sucessoCadastro, #sucessoOperacao {
+    color: #38a169;
+    font-size: 0.85rem;
+    margin-top: 8px;
+}
+
+/* Card de Conta Ativa */
+.grupo-status {
+    background-color: #f7fafc;
+    border-left: 4px solid #3182ce;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
 }
 
 #infoTitular {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #ffffff;
+    font-size: 1.1rem;
+    color: #2d3748;
 }
 
 .saldo-destaque {
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: #38bdf8; /* Azul claro estilo painel digital */
-    margin: 0.6rem 0;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2b6cb0;
+    margin: 8px 0;
 }
 
+.texto-ajuda {
+    font-size: 0.85rem;
+    color: #718096;
+}
+
+/* Botões de Ação da Conta */
+.acoesConta {
+    display: flex;
+    gap: 10px;
+}
+
+.btnEditar, .btnDeletar {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btnEditar {
+    background-color: #edf2f7;
+    color: #4a5568;
+}
+
+.btnEditar:hover {
+    background-color: #e2e8f0;
+}
+
+.btnDeletar {
+    background-color: #fed7d7;
+    color: #9b2c2c;
+}
+
+.btnDeletar:hover {
+    background-color: #feb2b2;
+}
+
+/* Operações Financeiras */
 .grupoBotoes {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .grupoBotoes button {
     flex: 1;
-    padding: 0.8rem;
+    padding: 10px;
     border: none;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
+    border-radius: 6px;
     color: white;
-
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s;
 }
 
-.btnDeposito { background-color: #05275e ; } 
-.btnDeposito:hover { opacity: 0.9; }
+.grupoBotoes button:hover {
+    opacity: 0.9;
+}
 
-.btnSaque { background-color: #05275e; } 
-.btnSaque:hover { opacity: 0.9; }
+.btnDeposito {
+    background-color: #38a169;
+}
 
-.btnTransferir { background-color: #05275e; } 
-.btnTransferir:hover { opacity: 0.9; }
+.btnSaque {
+    background-color: #dd6b20;
+}
 
+.btnTransferir {
+    background-color: #3182ce;
+}
+
+/* Tabela de Histórico */
 .tabela {
-    overflow-x: auto; /* Garante que não quebre em telas menores */
+    overflow-x: auto;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse; /* deixa a tabela com bordar finas, sem duplica-las */
+    border-collapse: collapse;
+    margin-top: 5px;
     text-align: left;
 }
 
-th {
-    padding: 0.85rem 1rem;
+th, td {
+    padding: 12px;
     border-bottom: 1px solid #e2e8f0;
-    font-size: 0.95rem;
-    background-color: #f8fafc;
-    color: #64748b;
-    font-weight: 600;
+    font-size: 0.9rem;
 }
 
-td {
-    padding: 0.85rem 1rem;
-    border-bottom: 1px solid #e2e8f0;
-    font-size: 0.95rem;
-    color: #334155;
+th {
+    background-color: #f7fafc;
+    color: #4a5568;
+    font-weight: 600;
 }
 
 .tabelaVazia {
     text-align: center;
-    color: #94a3b8;
-    padding: 2rem !important;
+    color: #a0aec0;
+    padding: 20px;
 }
 
-#erro{
-    margin-top: 1rem;
-    padding: 0.75rem;
-    background-color: #fef2f2;
-    color: #ef4444;
-    border: 1px solid #fee2e2;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-align: center;
-}
-
-#erroOperacao{
-    margin-top: 1rem;
-    padding: 0.75rem;
-    background-color: #fef2f2;
-    color: #ef4444;
-    border: 1px solid #fee2e2;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-align: center;
-}
-
-#sucessoCadastro{
-    margin-top: 1rem;
-    padding: 0.75rem;
-    background-color: #f2fef2;
-    color: #053c13;
-    border: 1px solid #f2fef2;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-align: center;
-}
-
-#sucessoOperacao{
-    margin-top: 1rem;
-    padding: 0.75rem;
-    background-color: #f2fef2;
-    color: #053c13;
-    border: 1px solid #f2fef2;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-align: center;
-}
