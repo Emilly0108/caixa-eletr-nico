@@ -381,7 +381,7 @@ async function sacar(){ // função sacar
 }
 
 async function transferir(){
-    erroOperacao.textContent = "";
+    erroOperacao.textContent = ""
 
     if(contaAtiva === null){ // veirifica se não foi selecionado nenhuma conta
         erroOperacao.textContent = "selecione uma conta antes de realizar operações";
