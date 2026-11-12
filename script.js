@@ -1,4 +1,4 @@
-const API = "https://6a8cb65763f113bab0b867f3.mockapi.io/contas"
+const API = "http://localhost:3000/contas"
 
 let contas = []; // array de guardar as contas
 let contaAtiva = null // constante que pega a conta selecionada
